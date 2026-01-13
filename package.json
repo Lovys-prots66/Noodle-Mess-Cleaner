@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "a small system for organizing files in a specific way",
   "main": "index.cjs",
+  "type" : "common",
   "scripts": {
     "dev" : "node ./index.cjs"
   },
