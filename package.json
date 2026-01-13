@@ -1,0 +1,11 @@
+{
+  "name": "organizer",
+  "version": "1.0.0",
+  "description": "a small system for organizing files in a specific way",
+  "main": "index.cjs",
+  "scripts": {
+    "dev" : "node ./index.cjs"
+  },
+  "author": "lovysprots66",
+  "license": "ISC"
+}
