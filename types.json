@@ -1,0 +1,55 @@
+{
+    
+    "images" : [
+        ".png", 
+        ".jpg", 
+        ".jpeg", 
+        ".gif"
+    ],
+    
+    "medias" : ".mp3",
+    
+    "documents" : [
+        ".pdf", 
+        ".docx", 
+        ".pptx", 
+        ".xlsx", 
+        ".xls",
+        ".csv",
+        ".xml"
+    ],
+
+    "compressed" : [
+        ".zip",
+        ".rar",
+        ".gz",
+        ".7z",
+        ".jar"
+    ],
+
+    "code" : [
+        ".html", 
+        ".css",
+        "js", 
+        ".jsx", 
+        ".ts", 
+        "tsx", 
+        ".php", 
+        ".c", 
+        "cpp",
+        "cs"
+    ],
+
+    "text" : [
+        ".md",
+        ".txt"
+    ],
+
+    "graphics" : [
+        ".blend",
+        ".ai",
+        ".svg",
+        ".psd"
+    ]
+
+}
