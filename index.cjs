@@ -17,14 +17,18 @@ async function gatherExts(dir = ""){
     try {
         const all = await fs.readdir(dir, { recursive : true });
 
-        let files;
+        let files = [];
 
-        // await Promise.all([])
+        for(const directive of all){
+            if(path.extname(directive)){
+                files = [...files, path.extname(directive)];
+            }
+        }
 
-        return all;
+        const uniques = new Set(files);
+        return Array.from(uniques);
+
     } catch (error) {
-        throw new Error(error.message);
+        throw new Error(error.stack);
     }
 }
-
-console.log(gatherExts("C:\\Users\\lenovo\\Desktop\\ctrl regio").then(console.log)); 
