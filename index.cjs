@@ -21,27 +21,31 @@ async function gatherExts(dir = ""){
     try {
         const all = await fs.readdir(dir, { recursive : true });
 
-        let files = [];
+        let files = {};
 
         for(const directive of all){
             if(path.extname(directive)){
-                files = [...files, path.extname(directive)];
+                files = {...files, [directive] : path.extname(directive)};
             }
         }
 
-        const uniques = new Set(files);
-        return Array.from(uniques);
-
+        // const uniques = new Set(files);
+        return files;
     } catch (error) {
         throw new Error(error.stack);
     }
 }
 
-async function cleanup(){
+async function cleanup(dir = "", targetDir = ""){
     try {
-        const exts = gatherExts();
 
-        Object.values(exts).includes
+        const fileExts = gatherExts(dir);
+
+        fileExts.forEach(ext => {
+            if(individual.includes(ext)){
+
+            }
+        });
 
     } catch (error) {
         
@@ -57,6 +61,8 @@ async function main(){
 }
 
 
-console.log(individual);
+// console.log(individual);
+
+console.log(gatherExts("C:\\Users\\lenovo\\Desktop\\ctrl regio").then(console.log));
 
 // console.log(availableExts);
