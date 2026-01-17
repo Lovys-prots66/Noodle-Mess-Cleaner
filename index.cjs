@@ -2,6 +2,9 @@ const rl = require("readline/promises");
 const fs = require("fs/promises")
 const path = require("path");
 
+const availableExts = require('./types.json'); 
+
+const individual = Object.values(availableExts).flatMap(item => item);
 
 async function requestPreference(question = ""){
     const prompt = rl.createInterface({
@@ -33,3 +36,27 @@ async function gatherExts(dir = ""){
         throw new Error(error.stack);
     }
 }
+
+async function cleanup(){
+    try {
+        const exts = gatherExts();
+
+        Object.values(exts).includes
+
+    } catch (error) {
+        
+    }
+}
+
+async function main(){
+    try {
+        
+    } catch (error) {
+        
+    }
+}
+
+
+console.log(individual);
+
+// console.log(availableExts);
