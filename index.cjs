@@ -29,8 +29,9 @@ async function gatherExts(dir = ""){
             }
         }
 
-        // const uniques = new Set(files);
-        return files;
+        const baseDir = path.resolve(dir);
+
+        return {files, baseDir};
     } catch (error) {
         throw new Error(error.stack);
     }
@@ -39,18 +40,19 @@ async function gatherExts(dir = ""){
 async function cleanup(dir = "", targetDir = ""){
     try {
 
-        const fileExts = await gatherExts(dir);
+        const {files, baseDir} = await gatherExts(dir);
 
-        console.log(fileExts);
+        // console.log(baseDir);
 
-        for(const [k, v] of Object.entries(fileExts)){
+        for(const [k, v] of Object.entries(files)){
             if(!individual.includes(v)) return;
 
-            // fs.copyFile()
+            
+            await fs.copyFile(path.join(dir, k), targetDir);
         }
 
     } catch (error) {
-        
+        throw new Error(error.message);
     }
 }
 
@@ -65,7 +67,7 @@ async function main(){
 
 console.log(individual);
 
-console.log(gatherExts("C:\\Users\\lenovo\\Desktop\\ctrl regio").then(console.log));
-console.log(cleanup("C:\\Users\\lenovo\\Desktop\\ctrl regio").then(console.log));
+// console.log(gatherExts("C:\\Users\\lenovo\\Desktop\\ctrl regio").then(console.log));
+cleanup("C:\\Users\\lenovo\\Desktop\\ctrl regio", "C:\\Users\\lenovo\\Desktop\\target")
 
 // console.log(availableExts);
