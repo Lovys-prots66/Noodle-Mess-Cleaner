@@ -97,3 +97,10 @@ async function cleanupTypeTwo(dir = ""){
         throw new Error(error.message);
     }
 }
+
+module.exports = {
+    requestPreference,
+    gatherExts,
+    cleanupTypeOne,
+    cleanupTypeTwo
+}
