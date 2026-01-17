@@ -4,8 +4,7 @@ const path = require("path");
 
 const availableExts = require('./types.json'); 
 
-const individual = Object.values(availableExts).flatMap(item => item).toSorted();
-
+// prompt user for directory path (soon)
 async function requestPreference(question = ""){
     const prompt = rl.createInterface({
         input : process.stdin,
@@ -17,6 +16,7 @@ async function requestPreference(question = ""){
     return input;
 }
 
+// gather all file extensions in the given directory
 async function gatherExts(dir = ""){
     try {
         const all = await fs.readdir(dir, { recursive : true });
@@ -36,13 +36,13 @@ async function gatherExts(dir = ""){
     }
 }
 
+// cleanup by copying files to target directory
 async function cleanupTypeOne(dir = "", targetDir = ""){
     try {
 
         const files = await gatherExts(dir);
 
-        // console.log(baseDir);
-
+        // copy files to their respective subdirectories
         for(const [key1, value1] of Object.entries(files)){
             for(const [key2, value2] of Object.entries(availableExts)){
 
@@ -67,19 +67,33 @@ async function cleanupTypeOne(dir = "", targetDir = ""){
     }
 }
 
-async function main(){
+// cleanup inside the given directory
+async function cleanupTypeTwo(dir = ""){
     try {
-        
+
+        const files = await gatherExts(dir);
+
+        // move files to their respective subdirectories
+        for(const [key1, value1] of Object.entries(files)){
+            for(const [key2, value2] of Object.entries(availableExts)){
+
+                if((Array.isArray(value2) && value2.includes(value1)) || key1 == value2){
+                    
+                    const subdir = path.join(dir, key2);
+                    
+                    if(!await fs.stat(subdir).catch(() => false)){
+                        await fs.mkdir(subdir);
+                    }
+
+                    await fs.rename(path.join(dir, key1), path.join(subdir, path.basename(key1)));
+
+                }
+                
+            }
+            
+        }
+
     } catch (error) {
-        
+        throw new Error(error.message);
     }
 }
-
-
-console.log(individual);
-
-// console.log(gatherExts("C:\\Users\\lenovo\\Desktop\\ctrl regio").then(console.log));
-cleanupTypeOne("C:\\Users\\lenovo\\Desktop\\ctrl regio", "C:\\Users\\lenovo\\Desktop\\target")
-
-console.log(Object.values(availableExts));
-// console.log(Object.);
