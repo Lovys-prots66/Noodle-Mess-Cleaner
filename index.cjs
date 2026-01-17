@@ -29,9 +29,8 @@ async function gatherExts(dir = ""){
             }
         }
 
-        const baseDir = path.resolve(dir);
+        return files;
 
-        return {files, baseDir};
     } catch (error) {
         throw new Error(error.stack);
     }
@@ -40,22 +39,22 @@ async function gatherExts(dir = ""){
 async function cleanupTypeOne(dir = "", targetDir = ""){
     try {
 
-        const {files} = await gatherExts(dir);
+        const files = await gatherExts(dir);
 
         // console.log(baseDir);
 
-        for(const [k, v] of Object.entries(files)){
-            for(const [kk, vv] of Object.entries(availableExts)){
+        for(const [key1, value1] of Object.entries(files)){
+            for(const [key2, value2] of Object.entries(availableExts)){
 
-                if((Array.isArray(vv) && vv.includes(v)) || k == vv){
+                if((Array.isArray(value2) && value2.includes(value1)) || key1 == value2){
                     
-                    const subdir = path.join(targetDir, kk);
+                    const subdir = path.join(targetDir, key2);
                     
                     if(!await fs.stat(subdir).catch(() => false)){
                         await fs.mkdir(subdir);
                     }
 
-                    await fs.copyFile(path.join(dir, k), path.join(subdir, path.basename(k)));
+                    await fs.copyFile(path.join(dir, key1), path.join(subdir, path.basename(key1)));
 
                 }
                 
