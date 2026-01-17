@@ -48,7 +48,7 @@ async function cleanup(dir = "", targetDir = ""){
             if(!individual.includes(v)) return;
 
             
-            await fs.copyFile(path.join(dir, k), targetDir);
+            await fs.copyFile(path.join(dir, k), path.join(targetDir, path.basename(k)));
         }
 
     } catch (error) {
