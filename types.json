@@ -16,7 +16,8 @@
         ".xlsx", 
         ".xls",
         ".csv",
-        ".xml"
+        ".xml",
+        ".json"
     ],
 
     "compressed" : [
@@ -30,14 +31,14 @@
     "code" : [
         ".html", 
         ".css",
-        "js", 
+        ".js", 
         ".jsx", 
         ".ts", 
         "tsx", 
         ".php", 
         ".c", 
-        "cpp",
-        "cs"
+        ".cpp",
+        ".cs"
     ],
 
     "text" : [

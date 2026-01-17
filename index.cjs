@@ -4,7 +4,7 @@ const path = require("path");
 
 const availableExts = require('./types.json'); 
 
-const individual = Object.values(availableExts).flatMap(item => item);
+const individual = Object.values(availableExts).flatMap(item => item).toSorted();
 
 async function requestPreference(question = ""){
     const prompt = rl.createInterface({
@@ -39,13 +39,15 @@ async function gatherExts(dir = ""){
 async function cleanup(dir = "", targetDir = ""){
     try {
 
-        const fileExts = gatherExts(dir);
+        const fileExts = await gatherExts(dir);
 
-        fileExts.forEach(ext => {
-            if(individual.includes(ext)){
+        console.log(fileExts);
 
-            }
-        });
+        for(const [k, v] of Object.entries(fileExts)){
+            if(!individual.includes(v)) return;
+
+            // fs.copyFile()
+        }
 
     } catch (error) {
         
@@ -61,8 +63,9 @@ async function main(){
 }
 
 
-// console.log(individual);
+console.log(individual);
 
 console.log(gatherExts("C:\\Users\\lenovo\\Desktop\\ctrl regio").then(console.log));
+console.log(cleanup("C:\\Users\\lenovo\\Desktop\\ctrl regio").then(console.log));
 
 // console.log(availableExts);
